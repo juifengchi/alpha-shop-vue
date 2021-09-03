@@ -10,17 +10,8 @@
       <div class="footer-section customer-service">
         <h1 class="sub-title">客戶服務</h1>
         <ul class="footer-list">
-          <li class="footer-list__item">
-            <a href="#" class="footer-list__link">運送說明</a>
-          </li>
-          <li class="footer-list__item">
-            <a href="#" class="footer-list__link">退換貨資訊</a>
-          </li>
-          <li class="footer-list__item">
-            <a href="#" class="footer-list__link">付款資訊</a>
-          </li>
-          <li class="footer-list__item">
-            <a href="#" class="footer-list__link">FAQ</a>
+          <li v-for="service in customerServices" :key="service.id" class="footer-list__item">
+            <router-link to="/" class="footer-list__link">{{ service.title }}</router-link>
           </li>
         </ul>
       </div>
@@ -28,14 +19,8 @@
       <div class="footer-section about">
         <h1 class="sub-title">關於我們</h1>
         <ul class="footer-list">
-          <li class="footer-list__item">
-            <a href="#" class="footer-list__link">品牌故事</a>
-          </li>
-          <li class="footer-list__item">
-            <a href="#" class="footer-list__link">媒體聯繫</a>
-          </li>
-          <li class="footer-list__item">
-            <a href="#" class="footer-list__link">Press kit</a>
+          <li v-for="about in abouts" :key="about.id" class="footer-list__item">
+            <router-link to="/" class="footer-list__link">{{ about.title }}</router-link>
           </li>
         </ul>
       </div>
@@ -43,14 +28,8 @@
       <div class="footer-section information">
         <h1 class="sub-title">資訊</h1>
         <ul class="footer-list">
-          <li class="footer-list__item">
-            <a href="#" class="footer-list__link">隱私權政策</a>
-          </li>
-          <li class="footer-list__item">
-            <a href="#" class="footer-list__link">Cookie</a>
-          </li>
-          <li class="footer-list__item">
-            <a href="#" class="footer-list__link">GDPR</a>
+          <li v-for="info in informations" :key="info.id" class="footer-list__item">
+            <router-link to="/" class="footer-list__link">{{ info.title }}</router-link>
           </li>
         </ul>
       </div>
@@ -59,18 +38,12 @@
         <h1 class="sub-title">追蹤 ALPHA Shop</h1>
         <ul class="footer-list">
           <li class="footer-list__item">
-            <a href="#" class="footer-list__link">+886 02123-45678</a>
+            <router-link to="/" class="footer-list__link">+886 02123-45678</router-link>
           </li>
           <li class="footer-list__item">
-            <a href="#" class="footer-list__link">
-              <img :src="require('../assets/images/f-icon-fb.png')" class="f-icon" />
-            </a>
-            <a href="#" class="footer-list__link">
-              <img :src="require('../assets/images/f-icon-ig.png')" class="f-icon" />
-            </a>
-            <a href="#" class="footer-list__link">
-              <img :src="require('../assets/images/f-icon-wts.png')" class="f-icon" />
-            </a>
+            <router-link v-for="medium in socialMedia" :key="medium.id" to="/" class="footer-list__link">
+              <img :src="medium.icon" class="f-icon" />
+            </router-link>
           </li>
         </ul>
       </div>
@@ -79,7 +52,72 @@
 </template>
 
 <script>
+import { v4 as uuidv4 } from 'uuid'
+
 export default {
-  
+  data() {
+    return {
+      customerServices: [
+        {
+          id: uuidv4(),
+          title: '運送說明'
+        },
+        {
+          id: uuidv4(),
+          title: '退換貨資訊'
+        },
+        {
+          id: uuidv4(),
+          title: '付款資訊'
+        },
+        {
+          id: uuidv4(),
+          title: 'FAQ'
+        }
+      ],
+      abouts: [
+        {
+          id: uuidv4(),
+          title: '品牌故事'
+        },
+        {
+          id: uuidv4(),
+          title: '媒體聯繫'
+        },
+        {
+          id: uuidv4(),
+          title: 'Press kit'
+        },
+      ],
+      informations: [
+        {
+          id: uuidv4(),
+          title: '隱私權政策'
+        },
+        {
+          id: uuidv4(),
+          title: 'Cookie'
+        },
+        {
+          id: uuidv4(),
+          title: 'GDPR'
+        },
+      ],
+      socialMedia: [
+        {
+          id: uuidv4(),
+          icon: require('../assets/images/f-icon-fb.png')
+        },
+        {
+          id: uuidv4(),
+          icon: require('../assets/images/f-icon-ig.png')
+        },
+        {
+          id: uuidv4(),
+          icon: require('../assets/images/f-icon-wts.png')
+        }
+      ]
+    }
+  }
 }
 </script>
