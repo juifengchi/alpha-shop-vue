@@ -14,7 +14,25 @@ const routes = [
   {
     path: '/home',
     name: 'home',
-    component: Home
+    component: Home,
+    redirect: '/home/1',
+    children: [
+      {
+        path: '1',
+        name: 'first',
+        component: () => import('../components/FormPart1')
+      },
+      {
+        path: '2',
+        name: 'second',
+        component: () => import('../components/FormPart2')
+      },
+      {
+        path: '3',
+        name: 'third',
+        component: () => import('../components/FormPart3')
+      }
+    ]
   },
   {
     path: '*',

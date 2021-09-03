@@ -1,5 +1,5 @@
 <template>
-  <div class="part d-none">
+  <div class="part">
     <div class="form-row">
       <h1 class="sub-title">運送方式</h1>
     </div>

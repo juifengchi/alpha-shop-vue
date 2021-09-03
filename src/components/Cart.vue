@@ -3,32 +3,18 @@
     <h5 class="cart-title mt-4 px-4">購物籃</h5>
 
     <div class="product-panel px-4">
-      <div class="product">
+      <div v-for="product in products" :key="product.id" class="product">
         <div class="product_img-wrapper">
-          <img :src="require('../assets/images/product-1.png')" />
+          <img :src="product.image" />
         </div>
         <div class="product_info-wrapper">
-          <p class="product-description">破壞補丁修身牛仔褲</p>
+          <p class="product-description">{{ product.description }}</p>
           <div class="product-qty">
             <span class="product-qty_minus">-</span>
-            <span class="product-qty_num">1</span>
+            <span class="product-qty_num">{{ product.qty }}</span>
             <span class="product-qty_plus">+</span>
           </div>
-          <p class="product-price">$3999</p>
-        </div>
-      </div>
-      <div class="product">
-        <div class="product_img-wrapper">
-          <img :src="require('../assets/images/product-2.png')" />
-        </div>
-        <div class="product_info-wrapper">
-          <p class="product-description">刷色直筒牛仔褲</p>
-          <div class="product-qty">
-            <span class="product-qty_minus">-</span>
-            <span class="product-qty_num">1</span>
-            <span class="product-qty_plus">+</span>
-          </div>
-          <p class="product-price">$1299</p>
+          <p class="product-price">${{ product.price }}</p>
         </div>
       </div>
     </div>
@@ -45,3 +31,19 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    initialProducts: {
+      type: Array,
+      required: true
+    }
+  },
+  data() {
+    return {
+      products: this.initialProducts
+    }
+  }
+}
+</script>

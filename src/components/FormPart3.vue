@@ -1,5 +1,5 @@
 <template>
-  <div class="part d-none">
+  <div class="part">
     <div class="form-row">
       <h1 class="sub-title">付款資訊</h1>
     </div>

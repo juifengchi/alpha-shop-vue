@@ -9,8 +9,7 @@
         <div class="select-wrapper">
           <select name="gender" id="gender" required>
             <option value="" disabled selected>請選擇稱謂</option>
-            <option value="mister">先生</option>
-            <option value="miss">小姐</option>
+            <option v-for="gender in genders" :key="gender.id" :value="gender.value">{{ gender.name }}</option>
           </select>
         </div>
       </div>
@@ -35,28 +34,7 @@
         <div class="select-wrapper">
           <select name="region" id="region" required>
             <option value="" disabled selected>請選擇縣市</option>
-            <option value="taipei-city">台北市</option>
-            <option value="new-taipei-city">新北市</option>
-            <option value="taoyuan-city">桃園市</option>
-            <option value="taichung-city">台中市</option>
-            <option value="tainan-city">台南市</option>
-            <option value="kaohsiung-city">高雄市</option>
-            <option value="hsinchu-county">新竹縣</option>
-            <option value="miaoli-county">苗栗縣</option>
-            <option value="changhua-county">彰化縣</option>
-            <option value="nantou-county">南投縣</option>
-            <option value="yunlin-county">雲林縣</option>
-            <option value="chiayi-county">嘉義縣</option>
-            <option value="pingtung-county">屏東縣</option>
-            <option value="yilan-county">宜蘭縣</option>
-            <option value="hualien-county">花蓮縣</option>
-            <option value="taitung-county">台東縣</option>
-            <option value="penghu-county">澎湖縣</option>
-            <option value="kinmen-county">金門縣</option>
-            <option value="lienchiang-county">連江縣</option>
-            <option value="keelung-city">基隆市</option>
-            <option value="hsinchu-city">新竹市</option>
-            <option value="chiayi-city">嘉義市</option>
+            <option v-for="region in regions" :key="region.id" :value="region.value">{{ region.name }}</option>
           </select>
         </div>
       </div>
@@ -67,3 +45,136 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      genders: [
+        {
+          id: 1,
+          name: '先生',
+          value: 'mister',
+        },
+        {
+          id: 2,
+          name: '小姐',
+          value: 'miss',
+        },
+      ],
+      regions: [
+        {
+          id: 1,
+          name: '台北市',
+          value: 'taipei-city',
+        },
+        {
+          id: 2,
+          name: '新北市',
+          value: 'new-taipei-city',
+        },
+        {
+          id: 3,
+          name: '桃園市',
+          value: 'taoyuan-city',
+        },
+        {
+          id: 4,
+          name: '台中市',
+          value: 'taichung-city',
+        },
+        {
+          id: 5,
+          name: '台南市',
+          value: 'tainan-city',
+        },
+        {
+          id: 6,
+          name: '高雄市',
+          value: 'kaohsiung-city',
+        },
+        {
+          id: 7,
+          name: '新竹縣',
+          value: 'hsinchu-county',
+        },
+        {
+          id: 8,
+          name: '苗栗縣',
+          value: 'miaoli-county',
+        },
+        {
+          id: 9,
+          name: '彰化縣',
+          value: 'changhua-county',
+        },
+        {
+          id: 10,
+          name: '南投縣',
+          value: 'nantou-county',
+        },
+        {
+          id: 11,
+          name: '雲林縣',
+          value: 'yunlin-county',
+        },
+        {
+          id: 12,
+          name: '嘉義縣',
+          value: 'chiayi-county',
+        },
+        {
+          id: 13,
+          name: '屏東縣',
+          value: 'pingtung-county',
+        },
+        {
+          id: 14,
+          name: '宜蘭縣',
+          value: 'yilan-county',
+        },
+        {
+          id: 15,
+          name: '花蓮縣',
+          value: 'hualien-county',
+        },
+        {
+          id: 16,
+          name: '台東縣',
+          value: 'taitung-county',
+        },
+        {
+          id: 17,
+          name: '澎湖縣',
+          value: 'penghu-county',
+        },
+        {
+          id: 18,
+          name: '金門縣',
+          value: 'kinmen-county',
+        },
+        {
+          id: 19,
+          name: '連江縣',
+          value: 'lienchiang-county',
+        },
+        {
+          id: 20,
+          name: '基隆市',
+          value: 'keelung-city',
+        },
+        {
+          id: 21,
+          name: '新竹市',
+          value: 'hsinchu-city',
+        },
+        {
+          id: 22,
+          name: '嘉義市',
+          value: 'chiayi-city',
+        },
+      ],
+    }
+  },
+}
+</script>
