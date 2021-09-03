@@ -592,6 +592,7 @@ body {
 
   #form {
     display: grid;
+    grid-template-columns: 1fr 1fr;
     grid-template-areas:
       'checkout-container cart-container'
       'control-container cart-container';

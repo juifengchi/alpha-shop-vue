@@ -7,38 +7,67 @@
       </label>
 
       <ul class="nav-list d-none">
-        <li class="nav-item">
-          <a class="nav-link" href="#">男款</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">女款</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">最新消息</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">聯絡我們</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">客製商品</a>
+        <li v-for="tab in tabs" :key="tab.id" class="nav-item">
+          <router-link class="nav-link" to="/">{{ tab.title }}</router-link>
         </li>
       </ul>
 
-      <a class="nav-logo" href="#">
+      <router-link class="nav-logo" to="/">
         <img :src="require('../assets/images/ac-logo.png')" class="ac-logo" />
-      </a>
+      </router-link>
 
       <div class="nav-icons d-none">
-        <button class="nav-icons__btn">
-          <img :src="require('../assets/images/n-icon-search.png')" class="n-icon" />
-        </button>
-        <button class="nav-icons__btn">
-          <img :src="require('../assets/images/n-icon-cart.png')" class="n-icon" />
-        </button>
-        <button class="nav-icons__btn">
-          <img :src="require('../assets/images/n-icon-moon.png')" class="n-icon" />
+        <button v-for="button in buttons" :key="button.id" class="nav-icons__btn">
+          <img :src="button.icon" class="n-icon" />
         </button>
       </div>
     </div>
   </nav>
 </template>
+
+<script>
+import { v4 as uuidv4 } from 'uuid'
+
+export default {
+  data() {
+    return {
+      tabs: [
+        {
+          id: uuidv4(),
+          title: '男款',
+        },
+        {
+          id: uuidv4(),
+          title: '女款',
+        },
+        {
+          id: uuidv4(),
+          title: '最新消息',
+        },
+        {
+          id: uuidv4(),
+          title: '聯絡我們',
+        },
+        {
+          id: uuidv4(),
+          title: '客製商品',
+        },
+      ],
+      buttons: [
+        {
+          id: uuidv4(),
+          icon: require('../assets/images/n-icon-search.png')
+        },
+        {
+          id: uuidv4(),
+          icon: require('../assets/images/n-icon-cart.png')
+        },
+        {
+          id: uuidv4(),
+          icon: require('../assets/images/n-icon-moon.png')
+        }
+      ]
+    }
+  },
+}
+</script>
