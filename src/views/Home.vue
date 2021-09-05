@@ -45,12 +45,15 @@ const dummyData = {
   ],
 }
 
+const STORAGE_KEY = 'alpha-shop-vue-user'
+const STORAGE_ITEM = 'alpha-shop-vue-item'
+
 export default {
   components: {
     Stepper,
     Cart,
     Control,
-    SubmitModal
+    SubmitModal,
   },
   data() {
     return {
@@ -73,15 +76,13 @@ export default {
     }
   },
   created() {
-    this.fetchProducts()
+    this.user = JSON.parse(localStorage.getItem(STORAGE_KEY)) || this.user
+    this.products = JSON.parse(localStorage.getItem(STORAGE_ITEM)) || dummyData.products
   },
   updated() {
     this.updateStep()
   },
   methods: {
-    fetchProducts() {
-      this.products = dummyData.products
-    },
     updateStep() {
       this.nowStep = Number(this.$route.name)
     },
@@ -99,6 +100,24 @@ export default {
     afterSubmit() {
       console.log(this.user)
       this.$modal.show('submit-modal')
+    },
+    saveStorage() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.user))
+      localStorage.setItem(STORAGE_ITEM, JSON.stringify(this.products))
+    },
+  },
+  watch: {
+    user: {
+      handler: function() {
+        this.saveStorage()
+      },
+      deep: true,
+    },
+    products: {
+      handler: function() {
+        this.saveStorage()
+      },
+      deep: true,
     },
   },
 }
