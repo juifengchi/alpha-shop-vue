@@ -7,13 +7,13 @@
         <Stepper :now-step="nowStep" />
 
         <div class="form-panel">
-          <router-view />
+          <router-view @after-select-shipping="afterSelectShipping" />
         </div>
       </div>
 
-      <Cart :initial-products="products" />
+      <Cart :initial-products="products" :initial-shipping-fee="shippingFee" />
 
-      <Control :now-step="nowStep" @after-button-clicked="afterButtonClicked" />
+      <Control :now-step="nowStep" @after-click-button="afterClickButton" />
     </form>
   </main>
 </template>
@@ -52,7 +52,7 @@ export default {
     return {
       products: [],
       nowStep: Number(this.$route.name),
-      shippingFee: '免費'
+      shippingFee: '免費',
     }
   },
   created() {
@@ -68,14 +68,17 @@ export default {
     updateStep() {
       this.nowStep = Number(this.$route.name)
     },
-    afterButtonClicked(e) {
-      if (e === 'next') {
+    afterClickButton(btn) {
+      if (btn === 'next') {
         this.nowStep += 1
-      } else if (e === 'previous') {
+      } else if (btn === 'previous') {
         this.nowStep -= 1
       }
       this.$router.push({ name: this.nowStep })
     },
-  },
+    afterSelectShipping(fee) {
+      this.shippingFee = fee
+    }
+  }
 }
 </script>

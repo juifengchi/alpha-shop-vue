@@ -5,10 +5,10 @@
     </div>
     <div class="form-row shipping-row">
       <div v-for="way in shippingWays" :key="way.id" class="shipping-way">
-        <input type="radio" name="shipping-way" :value="way.fee" :id="way.nameEn" :class="way.nameEn" :checked="way.isSelected" />
+        <input type="radio" name="shipping-way" :value="way.fee" :id="way.nameEn" :class="way.nameEn" :checked="way.isSelected" @click="handleShippingSelected(way.fee)" />
         <label :for="way.nameEn" :class="way.nameEn">
           <p class="shipping-name">{{ way.name }}</p>
-          <p class="shipping-time">{{way.time }}</p>
+          <p class="shipping-time">{{ way.time }}</p>
         </label>
         <span class="shipping-fee">{{ way.fee }}</span>
       </div>
@@ -37,7 +37,12 @@ export default {
           nameEn: 'express',
           isSelected: false
         }
-      ]
+      ],
+    }
+  },
+  methods: {
+    handleShippingSelected(fee) {
+      this.$emit('after-select-shipping', fee)
     }
   }
 }

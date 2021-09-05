@@ -11,8 +11,8 @@ export default {
   props: {
     nowStep: {
       type: Number,
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
     showPrevBtn() {
@@ -23,12 +23,12 @@ export default {
     },
     showSubmitBtn() {
       return this.nowStep === 3
-    }
+    },
   },
   methods: {
-    handleButtonClicked(e) {
-      this.$emit('after-button-clicked', e)
-    }
-  }
+    handleButtonClicked(btn) {
+      this.$emit('after-click-button', btn)
+    },
+  },
 }
 </script>
