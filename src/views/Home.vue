@@ -50,25 +50,18 @@ export default {
   },
   data() {
     return {
-      genders: [],
-      regions: [],
       products: [],
       nowStep: Number(this.$route.name),
       shippingFee: '免費'
     }
   },
   created() {
-    this.fetchFormOptions()
     this.fetchProducts()
   },
   updated() {
     this.updateStep()
   },
   methods: {
-    fetchFormOptions() {
-      this.genders = dummyData.genders
-      this.regions = dummyData.regions
-    },
     fetchProducts() {
       this.products = dummyData.products
     },
