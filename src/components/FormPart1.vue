@@ -7,7 +7,7 @@
       <div class="gender-row">
         <label for="gender">稱謂</label>
         <div class="select-wrapper">
-          <select name="gender" id="gender" required>
+          <select v-model="initialUser.gender" name="gender" id="gender" required>
             <option value="" disabled selected>請選擇稱謂</option>
             <option v-for="gender in genders" :key="gender.id" :value="gender.value">{{ gender.name }}</option>
           </select>
@@ -15,24 +15,24 @@
       </div>
       <div class="name-row">
         <label for="name">姓名</label>
-        <input type="text" id="name" placeholder="請輸入姓名" />
+        <input v-model="initialUser.name" type="text" id="name" placeholder="請輸入姓名" />
       </div>
     </div>
     <div class="form-row row-wrapper-two">
       <div class="phone-row">
         <label for="phone">電話</label>
-        <input type="text" id="phone" placeholder="請輸入行動電話" />
+        <input v-model="initialUser.phone" type="text" id="phone" placeholder="請輸入行動電話" />
       </div>
       <div class="email-row">
         <label for="email">Email</label>
-        <input type="text" id="email" placeholder="請輸入電子郵件" />
+        <input v-model="initialUser.email" type="text" id="email" placeholder="請輸入電子郵件" />
       </div>
     </div>
     <div class="form-row row-wrapper-three">
       <div class="region-row">
         <label for="region">縣市</label>
         <div class="select-wrapper">
-          <select name="region" id="region" required>
+          <select v-model="initialUser.region" name="region" id="region" required>
             <option value="" disabled selected>請選擇縣市</option>
             <option v-for="region in regions" :key="region.id" :value="region.value">{{ region.name }}</option>
           </select>
@@ -40,7 +40,7 @@
       </div>
       <div class="address-row">
         <label for="address">地址</label>
-        <input type="text" id="address" placeholder="請輸入地址" />
+        <input v-model="initialUser.address" type="text" id="address" placeholder="請輸入地址" />
       </div>
     </div>
   </div>
@@ -48,6 +48,12 @@
 
 <script>
 export default {
+  props: {
+    initialUser: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
       genders: [

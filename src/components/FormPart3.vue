@@ -5,21 +5,32 @@
     </div>
     <div class="form-row">
       <label for="card-host">持卡人姓名</label>
-      <input type="text" id="card-host" placeholder="John Doe" />
+      <input v-model="initialUser.cardHost" type="text" id="card-host" placeholder="John Doe" />
     </div>
     <div class="form-row">
       <label for="card-number">卡號</label>
-      <input type="text" id="card-number" placeholder="1111 2222 3333 4444" />
+      <input v-model="initialUser.cardNumber" type="text" id="card-number" placeholder="1111 2222 3333 4444" />
     </div>
     <div class="form-row row-wrapper-four">
       <div class="card-date-row">
         <label for="card-date">有效期限</label>
-        <input type="text" id="card-date" placeholder="MM/YY" />
+        <input v-model="initialUser.cardDate" type="text" id="card-date" placeholder="MM/YY" />
       </div>
       <div class="security-code-row">
         <label for="security-code">CVC / CCV</label>
-        <input type="text" id="security-code" placeholder="123" />
+        <input v-model="initialUser.securityCode" type="text" id="security-code" placeholder="123" />
       </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    initialUser: {
+      type: Object,
+      required: true
+    }
+  }
+}
+</script>

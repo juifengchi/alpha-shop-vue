@@ -7,14 +7,16 @@
         <Stepper :now-step="nowStep" />
 
         <div class="form-panel">
-          <router-view @after-select-shipping="afterSelectShipping" />
+          <router-view :initial-user="user" @after-select-shipping="afterSelectShipping" />
         </div>
       </div>
 
       <Cart :initial-products="products" :initial-shipping-fee="shippingFee" />
 
-      <Control :now-step="nowStep" @after-click-button="afterClickButton" />
+      <Control :now-step="nowStep" @after-click-button="afterClickButton" @after-submit="afterSubmit" />
     </form>
+
+    <SubmitModal :initial-user="user" />
   </main>
 </template>
 
@@ -22,6 +24,7 @@
 import Stepper from './../components/Stepper'
 import Cart from './../components/Cart'
 import Control from './../components/Control'
+import SubmitModal from './../components/SubmitModal'
 
 const dummyData = {
   products: [
@@ -47,12 +50,26 @@ export default {
     Stepper,
     Cart,
     Control,
+    SubmitModal
   },
   data() {
     return {
       products: [],
       nowStep: Number(this.$route.name),
       shippingFee: '免費',
+      user: {
+        gender: '',
+        name: '',
+        phone: '',
+        email: '',
+        region: '',
+        address: '',
+        shippingWay: 'standard',
+        cardHost: '',
+        cardNumber: '',
+        cardDate: '',
+        securityCode: '',
+      },
     }
   },
   created() {
@@ -78,7 +95,11 @@ export default {
     },
     afterSelectShipping(fee) {
       this.shippingFee = fee
-    }
-  }
+    },
+    afterSubmit() {
+      console.log(this.user)
+      this.$modal.show('submit-modal')
+    },
+  },
 }
 </script>
