@@ -19,17 +19,17 @@ const routes = [
     children: [
       {
         path: '1',
-        name: 'first',
+        name: '1',
         component: () => import('../components/FormPart1')
       },
       {
         path: '2',
-        name: 'second',
+        name: '2',
         component: () => import('../components/FormPart2')
       },
       {
         path: '3',
-        name: 'third',
+        name: '3',
         component: () => import('../components/FormPart3')
       }
     ]

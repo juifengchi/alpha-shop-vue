@@ -271,7 +271,6 @@ body {
   width: 90%;
   margin: 0 auto;
   .checkout-container {
-    min-height: 100%;
     .main-title {
       @extend %title-style;
     }
@@ -598,6 +597,7 @@ body {
       'control-container cart-container';
     .checkout-container {
       grid-area: checkout-container;
+      min-height: 375px;
     }
     .cart-container {
       grid-area: cart-container;
@@ -673,7 +673,6 @@ body {
   }
 
   .control-container {
-    margin-top: 2rem;
     display: flex;
     justify-content: flex-end;
     .previous {

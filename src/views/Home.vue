@@ -4,7 +4,7 @@
       <div class="checkout-container">
         <h1 class="main-title">結帳</h1>
 
-        <Stepper />
+        <Stepper :now-step="nowStep" />
 
         <div class="form-panel">
           <router-view />
@@ -13,7 +13,7 @@
 
       <Cart :initial-products="products" />
 
-      <Control @after-next-step-submit="afterNextStepSubmit" />
+      <Control :now-step="nowStep" @after-button-clicked="afterButtonClicked" />
     </form>
   </main>
 </template>
@@ -30,16 +30,16 @@ const dummyData = {
       image: require('../assets/images/product-1.png'),
       description: '破壞補丁修身牛仔褲',
       qty: 1,
-      price: 3999
+      price: 3999,
     },
     {
       id: 2,
       image: require('../assets/images/product-2.png'),
       description: '刷色直筒牛仔褲',
       qty: 1,
-      price: 1299
-    }
-  ]
+      price: 1299,
+    },
+  ],
 }
 
 export default {
@@ -52,12 +52,17 @@ export default {
     return {
       genders: [],
       regions: [],
-      products: []
+      products: [],
+      nowStep: Number(this.$route.name),
+      shippingFee: '免費'
     }
   },
   created() {
     this.fetchFormOptions()
     this.fetchProducts()
+  },
+  updated() {
+    this.updateStep()
   },
   methods: {
     fetchFormOptions() {
@@ -67,9 +72,17 @@ export default {
     fetchProducts() {
       this.products = dummyData.products
     },
-    afterNextStepSubmit() {
-      this.$route.push({ name: 'second' })
-    }
-  }
+    updateStep() {
+      this.nowStep = Number(this.$route.name)
+    },
+    afterButtonClicked(e) {
+      if (e === 'next') {
+        this.nowStep += 1
+      } else if (e === 'previous') {
+        this.nowStep -= 1
+      }
+      this.$router.push({ name: this.nowStep })
+    },
+  },
 }
 </script>
