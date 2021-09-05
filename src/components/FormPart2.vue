@@ -5,7 +5,7 @@
     </div>
     <div class="form-row shipping-row">
       <div v-for="way in shippingWays" :key="way.id" class="shipping-way">
-        <input v-model="initialUser.shippingWay" type="radio" name="shipping-way" :value="way.nameEn" :id="way.nameEn" :class="way.nameEn" @click="handleShippingSelected(way.fee)" />
+        <input v-model="initialUser.shippingWay" type="radio" name="shipping-way" :value="way.nameEn" :id="way.nameEn" :class="way.nameEn" />
         <label :for="way.nameEn" :class="way.nameEn">
           <p class="shipping-name">{{ way.name }}</p>
           <p class="shipping-time">{{ way.time }}</p>
@@ -42,11 +42,6 @@ export default {
           nameEn: 'express',
         }
       ],
-    }
-  },
-  methods: {
-    handleShippingSelected(fee) {
-      this.$emit('after-select-shipping', fee)
     }
   }
 }

@@ -7,11 +7,11 @@
         <Stepper :now-step="nowStep" />
 
         <div class="form-panel">
-          <router-view :initial-user="user" @after-select-shipping="afterSelectShipping" />
+          <router-view :initial-user="user" />
         </div>
       </div>
 
-      <Cart :initial-products="products" :initial-shipping-fee="shippingFee" />
+      <Cart :initial-products="products" :initial-shipping-fee="shippingFee" :initial-total-fee="totalFee" @after-change-qty="afterChangeQty" />
 
       <Control :now-step="nowStep" @after-click-button="afterClickButton" @after-submit="afterSubmit" />
     </form>
@@ -57,9 +57,8 @@ export default {
   },
   data() {
     return {
-      products: [],
       nowStep: Number(this.$route.name),
-      shippingFee: '免費',
+      products: [],
       user: {
         gender: '',
         name: '',
@@ -67,7 +66,7 @@ export default {
         email: '',
         region: '',
         address: '',
-        shippingWay: 'standard',
+        shippingWay: '',
         cardHost: '',
         cardNumber: '',
         cardDate: '',
@@ -75,17 +74,30 @@ export default {
       },
     }
   },
+  computed: {
+    shippingFee() {
+      if (this.user.shippingWay === 'express') return '$500'
+      return '免費'
+    },
+    totalFee() {
+      let total = 0
+      for (let i = 0; i < this.products.length; i++) {
+        total += this.products[i].qty * this.products[i].price
+      }
+      if (this.user.shippingWay === 'express') {
+        total += 500
+      }
+      return total
+    },
+  },
   created() {
     this.user = JSON.parse(localStorage.getItem(STORAGE_KEY)) || this.user
     this.products = JSON.parse(localStorage.getItem(STORAGE_ITEM)) || dummyData.products
   },
   updated() {
-    this.updateStep()
+    this.nowStep = Number(this.$route.name)
   },
   methods: {
-    updateStep() {
-      this.nowStep = Number(this.$route.name)
-    },
     afterClickButton(btn) {
       if (btn === 'next') {
         this.nowStep += 1
@@ -94,8 +106,23 @@ export default {
       }
       this.$router.push({ name: this.nowStep })
     },
-    afterSelectShipping(fee) {
-      this.shippingFee = fee
+    afterChangeQty(productId, btn) {
+      this.products = this.products.map(product => {
+        if (product.id === productId) {
+          if (btn === 'minus' && product.qty !== 1) {
+            return {
+              ...product,
+              qty: product.qty - 1,
+            }
+          } else if (btn === 'plus') {
+            return {
+              ...product,
+              qty: product.qty + 1,
+            }
+          }
+        }
+        return product
+      })
     },
     afterSubmit() {
       console.log(this.user)

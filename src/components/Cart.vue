@@ -3,7 +3,7 @@
     <h5 class="cart-title mt-4 px-4">購物籃</h5>
 
     <div class="product-panel px-4">
-      <div v-for="product in products" :key="product.id" class="product">
+      <div v-for="product in initialProducts" :key="product.id" class="product">
         <div class="product_img-wrapper">
           <img :src="product.image" />
         </div>
@@ -26,7 +26,7 @@
       </div>
       <div class="cost">
         <span class="cost_title">小計</span>
-        <span class="cost_fee total_fee">${{ totalFee }}</span>
+        <span class="cost_fee total_fee">${{ initialTotalFee }}</span>
       </div>
     </div>
   </div>
@@ -43,43 +43,15 @@ export default {
       type: String,
       required: true,
     },
-  },
-  data() {
-    return {
-      products: this.initialProducts,
+    initialTotalFee: {
+      type: Number,
+      required: true
     }
   },
   methods: {
     handleProductQtyChanged(productId, btn) {
-      this.products = this.products.map(product => {
-        if (product.id === productId) {
-          if (btn === 'minus' && product.qty !== 1) {
-            return {
-              ...product,
-              qty: product.qty - 1,
-            }
-          } else if (btn === 'plus') {
-            return {
-              ...product,
-              qty: product.qty + 1,
-            }
-          }
-        }
-        return product
-      })
+      this.$emit('after-change-qty', productId, btn)
     },
   },
-  computed: {
-    totalFee() {
-      let total = 0
-      for (let i = 0; i < this.products.length; i++) {
-        total += this.products[i].qty * this.products[i].price
-      }
-      if (this.initialShippingFee === '$500') {
-        total += 500
-      }
-      return total
-    }
-  }
 }
 </script>
